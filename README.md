@@ -145,6 +145,4 @@ Zweryfikowana zmiana trafia do lokalnej strategii w `PROJECT.md`. Skill nie prze
 
 Raport zawiera rezultat i odnośniki, wykorzystane próby, dowody dla kryteriów, wersję strategii, wynik meta-eval oraz decyzję: bez zmiany / `PENDING` / `ACTIVE` / `REJECTED` / `ROLLED_BACK`. `UNVERIFIED` oznacza brak potwierdzenia, a nie zaliczenie kryterium.
 
-## Pochodzenie
-
-Folder skilla skopiowano bez zmian z `adaptive-swarm/` w repozytorium [growdelan/skille-te-male-i-duze](https://github.com/growdelan/skille-te-male-i-duze), z commita `2e8962e24b0f3ab3a5d5925c1535b5c007f28c94`. Repozytorium źródłowe może wymagać dostępu. Ten README opisuje użycie skopiowanej wersji; szczegółowy kontrakt pozostaje w plikach skilla.
+szczegółowy kontrakt pozostaje w plikach skilla.

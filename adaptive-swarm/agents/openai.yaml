@@ -1,0 +1,7 @@
+interface:
+  display_name: "Adaptive Swarm"
+  short_description: "Sol 6 i Luna 6, eval oraz uczenie strategii projektu"
+  default_prompt: "Użyj $adaptive-swarm do wykonania zadania i oceny procesu. Cel: [rezultat]. Kontekst: [projekt i ograniczenia]. Kryteria: [warunki ukończenia]."
+
+policy:
+  allow_implicit_invocation: false

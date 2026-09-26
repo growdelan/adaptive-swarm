@@ -6,15 +6,19 @@ Celem jest udokumentowana poprawa decyzji organizacyjnych w danym projekcie. Odd
 
 Meta-ewaluator analizuje rzeczywiste dowody: kontrakt, briefy, podział pracy, użyte wersje strategii, wyniki eval i wcześniejsze pasujące doświadczenia. Odróżnia przyczynę od korelacji. Błąd środowiska nie uzasadnia automatycznie nowej roli; brak sygnału kończy meta-eval bez zmiany.
 
+Sygnałem może być także nieefektywność przy DONE: np. zapisane powtórzenia identycznej pracy bez nowej potrzeby, agent bez wykorzystanego rezultatu lub zmierzony koszt przekraczający ustalony cel. Samo odczucie, że zadanie trwało długo, nie wystarcza. Wskaż konkretny ślad i zachowaj kryteria jakości. Bez pomiarów czasu lub tokenów nie deklaruj ich oszczędności; jeśli są dowody powtórzeń, można mierzyć ich liczbę. Ocena procesu nie zmienia PASS dostarczonego wyniku i nie uruchamia automatycznie eksperymentu po każdym sukcesie.
+
 Kandydat zmienia **jedną sprawdzalną decyzję procesu**, np. rozpoznanie granic modułu przed implementacją, zakres briefu, kolejność dwóch prac, dobór modelu dla lekkiego podzadania, wybór effort lub dodatkowy przypadek weryfikacji. Dobór modelu musi respektować granice ze SKILL.md, w tym Sol 6 do eval i meta-eval. Model albo effort może różnić warianty tylko wtedy, gdy jest jedyną badaną zmianą; w pozostałych porównaniach utrzymaj oba bez zmian. Nie musi to oznaczać nowego agenta. W PROJECT.md zapisz:
 
-- ID, wersję bazową, zakres zastosowania i konkretną zmianę;
+- ID, wersję bazową, zakres zastosowania, konkretną zmianę oraz mały/duży wpływ z uzasadnieniem;
 - obserwację z dowodem oraz przewidywany mechanizm poprawy;
 - miarę główną, kierunek poprawy, próg akceptacji i dopuszczalny koszt;
 - chronione kryteria jakości i regresje, które dyskwalifikują wariant;
 - plan porównania, punkt odniesienia, warunek rollbacku i status PENDING.
 
 Ustal je przed zobaczeniem wyników. Wniosek „zawsze dodawaj Architecture Scout” jest zbyt szeroki, jeśli dowód dotyczy jednego modułu. Ogranicz regułę do sytuacji, dla których istnieje uzasadnienie.
+
+Zmiana ma duży wpływ, jeśli obejmuje szeroką klasę przyszłych zadań, stale zwiększa zasoby lub istotnie zmienia podział odpowiedzialności bądź sposób weryfikacji. Drobna, odwracalna korekta briefu w wąskim zakresie może mieć mały wpływ. Klasyfikacji nie obniżaj po wyniku tylko po to, aby przyspieszyć promocję.
 
 ## Ograniczony eksperyment
 
@@ -33,9 +37,13 @@ Eksperyment nie może odtwarzać nieodwracalnych działań w systemach zewnętrz
 
 Porównanie ocenia agent, który nie stworzył kandydata ani ocenianych rezultatów. Może to być dotychczasowy ewaluator, jeśli spełnia tę niezależność. Sam sprawdza dowody, porównywalność i nienaruszenie kryteriów; nie akceptuje deklarowanego zwycięstwa wykonawcy. Zewnętrzne lub nieobserwowalne kryteria pozostają UNVERIFIED.
 
-- **PENDING:** brak porównania, nieporównywalne dane, niepełne sprawdzenie lub niepewny efekt. Nie zastępuje aktywnej strategii.
-- **ACTIVE:** spełniony uprzedni próg poprawy i limit kosztu, brak naruszenia jakości, niezależny PASS porównania. Koordynator zapisuje nową wersję S1, S2… oraz poprzednią działającą wersję i stosuje nową regułę tylko w potwierdzonym zakresie. Bez przypadku sprawdzającego uogólnienie zakres pozostaje ograniczony do odtworzonej sytuacji.
-- **REJECTED:** porównanie nie potwierdziło korzyści lub ujawniło regresję. Zachowaj powód; nie próbuj kolejnego wariantu w tym wywołaniu.
+Dla małego wpływu wystarcza jedno poprawne potwierdzenie. Dla dużego wpływu wymagaj dwóch: pierwszego porównania i drugiego potwierdzenia przewidywanego efektu na innym, pasującym przypadku, nieużytym do opracowania zmiany. Każde musi spełnić ustalone progi jakości, korzyści i kosztu oraz uzyskać niezależną ocenę; ponowny odczyt tej samej próby przez innego agenta nie jest drugim dowodem. Samo DONE kolejnego zadania również nie wystarcza.
+
+Drugie potwierdzenie zbierz w następnym, ręcznie zleconym pasującym zadaniu, bez obchodzenia limitu jednego eksperymentu i trzech prób. Do tego czasu kandydat pozostaje PENDING z zapisem np. „1 z 2 potwierdzeń”, a aktywna strategia się nie zmienia. Zastosowanie kandydata na potrzeby drugiego porównania oznacz jako ograniczoną próbę. Dwa potwierdzenia są warunkiem operacyjnym, nie statystyczną gwarancją. Brak dotychczasowej klasyfikacji lub dowodów w starej pamięci nie pozwala ich domniemywać; sklasyfikuj kandydata i zweryfikuj istniejące dowody przed promocją. Nie cofaj automatycznie historycznych aktywnych strategii tylko z powodu aktualizacji skilla.
+
+- **PENDING:** brak porównania, nieporównywalne dane, niepełne sprawdzenie, niepewny efekt lub brak wymaganego drugiego potwierdzenia. Nie zastępuje aktywnej strategii.
+- **ACTIVE:** uzyskano liczbę potwierdzeń wymaganą dla wpływu zmiany, spełniono uprzednie progi poprawy i kosztu, bez naruszenia jakości. Koordynator zapisuje nową wersję S1, S2… oraz poprzednią działającą wersję i stosuje nową regułę tylko w potwierdzonym zakresie. Bez przypadku sprawdzającego uogólnienie zakres pozostaje ograniczony do odtworzonej sytuacji.
+- **REJECTED:** ukończone, porównywalne sprawdzenie nie spełniło progu korzyści, przekroczyło limit kosztu lub ujawniło regresję. Zachowaj powód; nie próbuj kolejnego wariantu w tym wywołaniu.
 - **ROLLED_BACK:** późniejsze dowody spełniły warunek wycofania. Przywróć zapisaną poprzednią sprawdzoną strategię, odnotuj wersję i dowód. Rollback strategii nie cofa zmian użytkownika i nie daje nowych prób naprawy rezultatu.
 
 Nie traktuj braku danych jako FAIL kandydata ani pojedynczego lokalnego sukcesu jako statystycznej gwarancji. Przed kolejnym użyciem sprawdź, czy zakres i przesłanki nadal pasują. Monitoruj rzeczywisty efekt i koszt w następnych zadaniach; wycofaj regułę przy potwierdzonej regresji lub sprzeczności z aktualnym kontraktem. Bez pasującego zadania efekt pozostaje niezmierzony.

@@ -18,7 +18,7 @@ Kontekst: ...
 Kryteria: ...
 ```
 
-Ustal folder i obowiązujące instrukcje. Przeczytaj istniejący `docs/swarm/STATE.md` oraz sekcję aktywnej strategii w `PROJECT.md`; pozostałą pamięć czytaj stosownie do zadania. Sprawdź aktualność zastosowanych faktów. Przy pierwszym zapisie lub wznowieniu przeczytaj [kontrakt pamięci](references/memory.md). Skill korzysta z tych samych czterech plików co poprzednia wersja, bez resetowania rozpoczętych zadań.
+Ustal folder i obowiązujące instrukcje. Przeczytaj istniejący `docs/swarm/STATE.md` oraz sekcję aktywnej strategii w `PROJECT.md`; pozostałą pamięć czytaj stosownie do zadania. Sprawdź aktualność zastosowanych faktów. Przy pierwszym zapisie, wznowieniu lub konflikcie reguł przeczytaj [kontrakt pamięci](references/memory.md). Skill korzysta z tych samych czterech plików co poprzednia wersja, bez resetowania rozpoczętych zadań.
 
 Niepełne dane uzupełniaj jawnymi założeniami; pytaj tylko o niezbędne rozstrzygnięcia, których nie można ustalić. Niewypełniony szablon nie jest zadaniem. Rutynowe decyzje i kontynuacja w uzgodnionym zakresie nie wymagają ponownej zgody.
 
@@ -53,7 +53,7 @@ Po FAIL wskaż przyczynę, dowód i zmianę podejścia. Naprawa po negatywnym ev
 
 Przy zamknięciu zadania ewaluator krótko rozróżnia błąd rezultatu, problem środowiska i problem procesu. Brak istotnego sygnału oznacza „bez zmiany strategii”, bez dodatkowego agenta lub eksperymentu. Sukces zadania nie jest automatycznie sukcesem strategii.
 
-Przy powtarzającym się problemie, odtworzonym błędzie procesu albo pasującym kandydacie z pamięci przeczytaj [zasady doskonalenia](references/process-learning.md). Meta-ewaluator analizuje np. braki w briefie, złą dekompozycję, przedwczesną implementację, konflikty zapisu lub lukę w eval. Koordynator może automatycznie zastosować zweryfikowaną poprawę lokalnej strategii; nie wymaga to dodatkowej bramki akceptacji.
+Przy powtarzającym się problemie, odtworzonym błędzie procesu, udokumentowanej nieefektywności mimo DONE albo pasującym kandydacie z pamięci przeczytaj [zasady doskonalenia](references/process-learning.md). Meta-ewaluator analizuje np. braki w briefie, złą dekompozycję, zbędne powtórzenia pracy, konflikty zapisu lub lukę w eval. Nie wyszukuj usprawnień na siłę po każdym sukcesie. Koordynator może automatycznie zastosować zweryfikowaną poprawę lokalnej strategii; zmiana o dużym wpływie wymaga dwóch niezależnych potwierdzeń opisanych w zasadach doskonalenia, bez nowej bramki akceptacji użytkownika.
 
 **Najwyżej jeden kandydat i jeden ograniczony eksperyment porównawczy na wywołanie**, z zachowaniem licznika przy wznowieniu. Nie uruchamiaj eksperymentu bez przydatnego punktu odniesienia. Niedostateczne dane pozostawiają kandydata jako PENDING, nie blokują poprawnie ukończonego zadania. Meta-learning nie daje czwartej próby ani prawa do dodatkowych zmian ukończonego rezultatu.
 

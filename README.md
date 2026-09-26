@@ -14,6 +14,7 @@ adaptive-swarm/
 └── references/
     ├── memory.md
     └── process-learning.md
+benchmarks/                 # scenariusze i raporty, poza pakietem skilla
 README.md
 ```
 
@@ -133,7 +134,11 @@ Pamięć nie powinna zawierać sekretów ani pełnych logów. Nie publikuj jej a
 
 Po ukończeniu celu uruchom `$adaptive-swarm` z **nowym Celem, Kontekstem i Kryteriami**. Nowy niezależny cel otrzymuje własny licznik prób, a potwierdzone wnioski oraz pasująca aktywna strategia projektu mogą zostać wykorzystane ponownie. Skill nie wybiera sam kolejnego zadania z roadmapy.
 
-Przy powtarzającym się problemie procesu może zaproponować jedną zmianę strategii i wykonać najwyżej jeden ograniczony eksperyment porównawczy na wywołanie. Wznowienie tego samego celu zachowuje wykorzystany budżet eksperymentu. Bez wystarczających dowodów kandydat pozostaje `PENDING`; poprawnie ukończone zadanie nie wymaga udanego eksperymentu.
+Przy powtarzającym się problemie procesu lub udokumentowanej nieefektywności mimo `DONE` może zaproponować jedną zmianę strategii i wykonać najwyżej jeden ograniczony eksperyment porównawczy na wywołanie. Wznowienie tego samego celu zachowuje wykorzystany budżet eksperymentu. Bez wystarczających dowodów kandydat pozostaje `PENDING`; poprawnie ukończone zadanie nie wymaga udanego eksperymentu.
+
+Mała zmiana wymaga jednego potwierdzenia. Zmiana o dużym wpływie — np. dodatkowy agent przy szerokiej klasie zadań — wymaga dwóch potwierdzeń na różnych pasujących przypadkach; drugie zbiera się w kolejnym ręcznie zleconym zadaniu. Samo `DONE` nie dowodzi korzyści procesu.
+
+Przy konflikcie strategii obowiązuje bieżący kontrakt i ograniczenia skilla. Wśród zgodnych, potwierdzonych reguł pierwszeństwo mają jawny wyjątek i bardziej szczegółowy zakres, a nie sama nowsza data. Nierozstrzygnięty konflikt oznacza pominięcie konfliktujących reguł, powrót w tym zakresie do zasad bazowych i zapis uzasadnienia.
 
 Zweryfikowana zmiana trafia do lokalnej strategii w `PROJECT.md`. Skill nie przepisuje automatycznie własnego źródła ani globalnej konfiguracji.
 
@@ -145,4 +150,10 @@ Zweryfikowana zmiana trafia do lokalnej strategii w `PROJECT.md`. Skill nie prze
 
 Raport zawiera rezultat i odnośniki, wykorzystane próby, dowody dla kryteriów, wersję strategii, wynik meta-eval oraz decyzję: bez zmiany / `PENDING` / `ACTIVE` / `REJECTED` / `ROLLED_BACK`. `UNVERIFIED` oznacza brak potwierdzenia, a nie zaliczenie kryterium.
 
-szczegółowy kontrakt pozostaje w plikach skilla.
+Szczegółowy kontrakt pozostaje w plikach skilla.
+
+## Testowanie i wydania
+
+[Scenariusze regresyjne](benchmarks/README.md) pozwalają przygotować izolowane przypadki, odtworzyć decyzje protokołu i ocenić rzeczywiste artefakty oraz działania. Nie są ładowane podczas zwykłego używania skilla. Wyniki rozróżniają test decyzji od pełnego wykonania zadania; nie stanowią procentowej oceny skuteczności na dowolnych projektach.
+
+Wersje pakietu są oznaczane tagami. [GitHub Releases](https://github.com/growdelan/adaptive-swarm/releases) zawiera opis zmian i archiwum instalacyjne. Nazwa wywołania pozostaje `$adaptive-swarm`, niezależnie od numeru wydania.

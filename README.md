@@ -70,6 +70,8 @@ K3: Istniejące testy dla zmienionego modułu przechodzą.
 
 Koordynator ustala kontrakt, punkt odniesienia, zespół i sposób weryfikacji. Następnie wykonuje oraz integruje pracę, a niezależny ewaluator sprawdza każde kryterium jako `PASS`, `FAIL` albo `UNVERIFIED`.
 
+Przed wykonaniem dobiera sposób sprawdzenia rzeczywistego rezultatu, korzystając z istniejących narzędzi projektu. Przy naprawie błędu sprawdza również, czy kontrola potrafi go wykryć — przechodzący test, który omija problem, nie potwierdza naprawy. Jeśli odtworzenie nie jest możliwe, ujawnia ograniczenie i szuka innych dowodów.
+
 Na jeden cel przypadają maksymalnie **trzy próby**: pierwsze rozwiązanie i dwie rundy napraw po negatywnym eval. Zwykłe kroki wykonania i kontrole wstępne mieszczą się w bieżącej próbie. Wynik `DONE` wymaga `PASS` wszystkich obowiązkowych kryteriów dla zintegrowanego rezultatu oraz zapisanej pamięci.
 
 ## Gdzie zapisywana jest pamięć
@@ -141,6 +143,8 @@ Mała zmiana wymaga jednego potwierdzenia. Zmiana o dużym wpływie — np. doda
 Przy konflikcie strategii obowiązuje bieżący kontrakt i ograniczenia skilla. Wśród zgodnych, potwierdzonych reguł pierwszeństwo mają jawny wyjątek i bardziej szczegółowy zakres, a nie sama nowsza data. Nierozstrzygnięty konflikt oznacza pominięcie konfliktujących reguł, powrót w tym zakresie do zasad bazowych i zapis uzasadnienia.
 
 Zweryfikowana zmiana trafia do lokalnej strategii w `PROJECT.md`. Skill nie przepisuje automatycznie własnego źródła ani globalnej konfiguracji.
+
+Przy potwierdzonym, powtarzającym się błędzie rozważa trwałe zabezpieczenie w projekcie, np. test regresyjny lub regułę lintowania. Jego wdrożenie musi mieścić się w zakresie zadania i limicie prób; po `DONE` lub wykorzystaniu prób pozostaje propozycją. Poprawnie działające zabezpieczenie nie jest samo w sobie dowodem poprawy strategii.
 
 ## Jak czytać raport końcowy
 

@@ -1,6 +1,6 @@
 # Scenariusze regresyjne
 
-Te przypadki sprawdzają decyzje protokołu przy zadanej historii. Są oddzielone od pakietu instalowanego skilla. Dane historyczne, oceny i pomiary w `cases.json` są syntetycznymi wejściami testu: nie stanowią dowodów, że rój osiągnął opisane korzyści w rzeczywistym projekcie.
+Przypadki sprawdzają decyzje protokołu przy zadanej historii oraz etap eval na uruchamialnym kodzie. Są oddzielone od pakietu instalowanego skilla. Dane historyczne, oceny i pomiary w `cases.json` są syntetycznymi wejściami testu: nie stanowią dowodów, że rój osiągnął opisane korzyści w rzeczywistym projekcie.
 
 ## Odtworzenie
 
@@ -12,10 +12,16 @@ Te przypadki sprawdzają decyzje protokołu przy zadanej historii. Są oddzielon
 
 ## Zakres i granice
 
-To testy poszczególnych decyzji po dostarczonych ocenach, a nie pełne wykonanie od celu do niezależnego eval. Wyłączenie powoływania agentów w żądaniu testowym izoluje etap koordynacji i nie zmienia reguł zwykłego używania skilla. Ocena testowa jest wykonywana z zewnątrz.
+Większość przypadków sprawdza poszczególne decyzje po dostarczonych ocenach. `eval-missed-defect` i `eval-correct-result` sprawdzają niezależnego ewaluatora na rzeczywistych wywołaniach małego modułu Pythona: wykonawca testu otrzymuje kontrakt, kod sprzed i po deklarowanej naprawie, test oraz raport implementacji. Zapisuje wyłącznie `EVALUATION.md`. Nie otrzymuje klucza odpowiedzi. Para obejmuje błędny i poprawny rezultat przy tym samym istniejącym teście; sam zielony wynik tego testu nie rozstrzyga kontraktu.
 
-Wszystkie przypadki wymagają zachowania rezultatu `result.txt`, limitu czterech plików pamięci, liczników oraz źródeł skilla. Brak zmierzonego kosztu nie jest kosztem zerowym. Nie oczekuj identycznego sformułowania notatek; oceniaj decyzję i jej skutki.
+`recurring-defect-after-done` sprawdza rozważenie trwałego zabezpieczenia przy syntetycznej historii powtórzeń i zachowanie granic zamkniętego zadania. Nie sprawdza skuteczności samego zabezpieczenia.
+
+Żaden z tych przypadków nie jest pełnym wykonaniem od celu do niezależnego eval. Wyłączenie powoływania agentów w żądaniu testowym izoluje odpowiedni etap i nie zmienia reguł zwykłego używania skilla. Ocena testowa jest wykonywana z zewnątrz.
+
+Przypadki decyzji protokołu wymagają zachowania rezultatu `result.txt`, limitu czterech plików pamięci, liczników oraz źródeł skilla. W przypadkach eval zachowaj wejściowy kod i testy; pamięć koordynatora nie jest tworzona. Brak zmierzonego kosztu nie jest kosztem zerowym. Nie oczekuj identycznego sformułowania notatek; oceniaj decyzję i jej skutki.
 
 Pełny test wykonania wymaga osobnego zadania z rzeczywistymi artefaktami oraz śladami powołań, modeli, napraw i niezależnego eval. Ten zestaw nie potwierdza faktycznej eskalacji Luna → Sol, jakości rzeczywistych porównań A/B ani statystycznej poprawy skuteczności. Kolejne wydania można porównywać na tych samych wejściach, ale mała liczba przejść nie daje wiarygodnej uniwersalnej oceny procentowej.
 
 Raport pierwszego wydania: [v1.0.0](results-v1.0.0.md).
+
+Raport weryfikacji rezultatu i zabezpieczeń: [v1.1.0](results-v1.1.0.md).

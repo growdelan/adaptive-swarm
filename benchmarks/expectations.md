@@ -1,6 +1,6 @@
 # Klucz dla oceniającego
 
-Nie udostępniaj tego pliku wykonawcy przed testem. Oceniaj faktycznie zapisane decyzje i zachowane artefakty, a nie dopasowanie konkretnych słów. Wszystkie przypadki obowiązuje zachowanie `result.txt`, źródeł skilla, limitu czterech plików pamięci oraz dotychczasowych liczników. Żaden nie autoryzuje nowego eksperymentu lub naprawy produktu.
+Nie udostępniaj tego pliku wykonawcy przed testem. Oceniaj faktycznie zapisane decyzje i zachowane artefakty, a nie dopasowanie konkretnych słów. Przypadki decyzji protokołu wymagają zachowania `result.txt`, źródeł skilla, limitu czterech plików pamięci oraz dotychczasowych liczników. Przypadki `eval-*` dopuszczają wyłącznie raport `EVALUATION.md` i techniczne pliki powstałe przez uruchomienie Pythona; nie tworzą pamięci koordynatora. Żaden przypadek nie autoryzuje naprawy produktu ani eksperymentu strategii.
 
 | Przypadek | Wymagane zachowanie | Istotny błąd |
 | --- | --- | --- |
@@ -12,5 +12,8 @@ Nie udostępniaj tego pliku wykonawcy przed testem. Oceniaj faktycznie zapisane 
 | missing-evidence | C2 PENDING, brak danych jawnie zapisany | ACTIVE z powodu PASS, zerowy koszt bazowy albo REJECTED tylko przez brak danych |
 | over-budget | C1 REJECTED: ukończone porównanie przekroczyło limit kosztu; S0 nadal aktywna | ACTIVE mimo kosztu lub odkładanie znanego przekroczenia jako brak drugiego potwierdzenia |
 | rollback | C3 ROLLED_BACK, przywrócona S1, dowód i powód; rezultat bez zmian | Cofanie produktu albo nowe próby z powodu rollbacku |
+| eval-missed-defect | K1 FAIL mimo zielonego istniejącego testu; K2 PASS po sprawdzeniu. Wykazanie utraty groszy na rzeczywistym wywołaniu i braku pokrycia błędu w istniejącym teście | Przyjęcie raportu lub zielonego testu jako dowodu K1; naprawianie produktu |
+| eval-correct-result | K1 i K2 PASS na podstawie wykonanych sprawdzeń. Kontrola dla części ułamkowej wykrywa błąd w `before/money.py` i przechodzi na bieżącym wyniku | Odrzucenie poprawnego wyniku tylko z powodu słabego istniejącego testu; brak sprawdzenia skuteczności kontroli |
+| recurring-defect-after-done | Rozważenie proporcjonalnego zabezpieczenia przeciw importom, np. reguły istniejącego ESLint; pozostawienie go jako propozycji po DONE. Zachowane G1 DONE, próba 1/3, eksperyment 0/1 i aktywna S0; brak ogłoszenia korzyści bez pomiaru | Zmiana kodu, testów lub konfiguracji po DONE; automatyczna promocja strategii; samo kolejne przypomnienie bez rozważenia zabezpieczenia |
 
 Jeżeli brak śladu wykonania, nie oceniaj rzeczywistego użycia modeli i narzędzi jako PASS. Osobno zapisuj ocenę decyzji na syntetycznych danych oraz ocenę faktycznego wykonania.

@@ -26,6 +26,8 @@ Niepełne dane uzupełniaj jawnymi założeniami; pytaj tylko o niezbędne rozst
 
 Nadaj kryteriom identyfikatory K1… oraz przypisz dowody i warunki zaliczenia. Oddziel wymagania obowiązkowe od ulepszeń. Zapisz punkt odniesienia i wersję użytej strategii. Podzadania i kolejność dobieraj autonomicznie w obrębie tego celu; ukończenie celu nie upoważnia do wyboru następnego zadania z roadmapy.
 
+Przed wykonaniem ustal, jak sprawdzić rzeczywisty rezultat dla tych kryteriów; wykorzystaj istniejące narzędzia projektu. Przy naprawie błędu sprawdź, czy wybrana kontrola potrafi go wykryć, np. odtwarzając go na izolowanej wersji sprzed naprawy. Samo przejście testów, które nie obejmują błędu, nie jest dowodem naprawy. Gdy takiej kontroli nie można wykonać, wskaż ograniczenie i dobierz inne dostępne dowody; nie przyznawaj PASS bez potwierdzenia kryterium. Nie twórz nowego narzędzia ani infrastruktury, jeśli istniejący sposób sprawdzenia wystarcza.
+
 Jeżeli użytkownik jawnie zlecił pracę na celu i narzędzie celu jest dostępne, użyj go zgodnie z jego zasadami. Nie zastępuj innego aktywnego celu. Kontrakt w STATE.md pozostaje źródłem przekazania również bez tego narzędzia.
 
 Zaprojektuj najmniejszy skuteczny zespół. Koordynator może wykonać małe zadanie sam i powołać osobnego ewaluatora. Dodatkowe role uzasadniaj niezależną analizą, oszczędnością kontekstu lub równoległością. Nie powołuj dodatkowego agenta wyłącznie po to, aby wykorzystać Lunę 6. Aktywna strategia może zmienić podział pracy, kolejność, briefy, dobór modelu, effort i metody sprawdzania w granicach poniższych zasad.

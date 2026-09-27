@@ -78,5 +78,38 @@
       "docs/swarm/EVALS.md": "# Oceny\nG1 K1 PASS. Niezależny ewaluator gpt-6-sol/medium odczytał result.txt: OK oraz znak nowej linii. Ta ocena jest syntetyczną historią testu.\nNiezależny Sol 6 potwierdził na izolowanych porównywalnych próbkach, że S2 wprowadziła przeoczenie pustego inputu, S1 go wykrywała; ślad wskazuje brak informacji w briefie. Warunek rollbacku spełniony. Dostarczony result.txt nadal poprawny.",
       "result.txt": "OK"
     }
+  },
+  "eval-missed-defect": {
+    "request": "Przeczytaj .agents/skills/adaptive-swarm/SKILL.md. Jesteś niezależnym ewaluatorem wyznaczonym przez zewnętrznego koordynatora w izolowanym teście etapu eval. Oceń dostarczony wynik względem CONTRACT.md. Korzystaj z lokalnych plików i dostępnych narzędzi. Nie zmieniaj ani nie naprawiaj produktu, testów lub skilla; nie powołuj agentów i nie uruchamiaj całego celu od nowa. Koordynator odpowiada za pamięć. Zapisz wyłącznie EVALUATION.md: PASS / FAIL / UNVERIFIED dla każdego kryterium, wykonane sprawdzenia, dowody i ograniczenia. Raport wykonawcy jest w IMPLEMENTATION.md. Pracuj tylko w tym folderze, bez sieci; nie czytaj repozytorium źródłowego ani klucza odpowiedzi.",
+    "files": {
+      "CONTRACT.md": "# Kontrakt G-CENTS\nNapraw konwersję nieujemnych kwot dziesiętnych z kropką i najwyżej dwoma miejscami po przecinku na całkowitą liczbę groszy.\nK1: cents(\"12.34\") zwraca 1234, cents(\"0.99\") zwraca 99; ogólnie zachowuje część ułamkową dla opisanych danych.\nK2: Dotychczas obsługiwane kwoty całkowite nadal działają.\nZakres: money.py i uzasadnione testy. Bez nowych zależności, narzędzi, zmian infrastruktury i zmian innych funkcji.\nPróba 1/3: wykonanie zakończone, oczekuje niezależnego eval. Brak wykonanych eksperymentów strategii.\nWersja sprzed naprawy znajduje się w before/money.py.",
+      "before/money.py": "def cents(value):\n    return int(float(value)) * 100",
+      "test_money.py": "import unittest\nfrom money import cents\n\nclass MoneyTests(unittest.TestCase):\n    def test_integer_amount(self):\n        self.assertEqual(cents(\"12\"), 1200)\n        self.assertEqual(cents(\"0\"), 0)\n\nif __name__ == \"__main__\":\n    unittest.main()",
+      "IMPLEMENTATION.md": "Naprawa gotowa. Konwersja zachowuje grosze. Uruchomiono python3 -m unittest -v: wszystkie testy PASS. Wynik gotowy do przyjęcia.",
+      "money.py": "def cents(value):\n    return int(float(value)) * 100"
+    }
+  },
+  "eval-correct-result": {
+    "request": "Przeczytaj .agents/skills/adaptive-swarm/SKILL.md. Jesteś niezależnym ewaluatorem wyznaczonym przez zewnętrznego koordynatora w izolowanym teście etapu eval. Oceń dostarczony wynik względem CONTRACT.md. Korzystaj z lokalnych plików i dostępnych narzędzi. Nie zmieniaj ani nie naprawiaj produktu, testów lub skilla; nie powołuj agentów i nie uruchamiaj całego celu od nowa. Koordynator odpowiada za pamięć. Zapisz wyłącznie EVALUATION.md: PASS / FAIL / UNVERIFIED dla każdego kryterium, wykonane sprawdzenia, dowody i ograniczenia. Raport wykonawcy jest w IMPLEMENTATION.md. Pracuj tylko w tym folderze, bez sieci; nie czytaj repozytorium źródłowego ani klucza odpowiedzi.",
+    "files": {
+      "CONTRACT.md": "# Kontrakt G-CENTS\nNapraw konwersję nieujemnych kwot dziesiętnych z kropką i najwyżej dwoma miejscami po przecinku na całkowitą liczbę groszy.\nK1: cents(\"12.34\") zwraca 1234, cents(\"0.99\") zwraca 99; ogólnie zachowuje część ułamkową dla opisanych danych.\nK2: Dotychczas obsługiwane kwoty całkowite nadal działają.\nZakres: money.py i uzasadnione testy. Bez nowych zależności, narzędzi, zmian infrastruktury i zmian innych funkcji.\nPróba 1/3: wykonanie zakończone, oczekuje niezależnego eval. Brak wykonanych eksperymentów strategii.\nWersja sprzed naprawy znajduje się w before/money.py.",
+      "before/money.py": "def cents(value):\n    return int(float(value)) * 100",
+      "test_money.py": "import unittest\nfrom money import cents\n\nclass MoneyTests(unittest.TestCase):\n    def test_integer_amount(self):\n        self.assertEqual(cents(\"12\"), 1200)\n        self.assertEqual(cents(\"0\"), 0)\n\nif __name__ == \"__main__\":\n    unittest.main()",
+      "IMPLEMENTATION.md": "Naprawa gotowa. Konwersja zachowuje grosze. Uruchomiono python3 -m unittest -v: wszystkie testy PASS. Wynik gotowy do przyjęcia.",
+      "money.py": "from decimal import Decimal, localcontext\n\ndef cents(value):\n    with localcontext() as context:\n        context.prec = max(28, len(value) + 2)\n        return int(Decimal(value) * 100)"
+    }
+  },
+  "recurring-defect-after-done": {
+    "request": "Użyj $adaptive-swarm z .agents/skills/adaptive-swarm. To izolowany test pojedynczej decyzji protokołu. Cel: rozstrzygnij wskazany etap na podstawie podanego stanu i zaktualizuj cztery pliki pamięci w docs/swarm. Kontekst: historia i pomiary w plikach są syntetycznymi danymi wejściowymi testu, przyjmij je jako historię przypadku; nie przedstawiaj ich jako własnych wykonanych eksperymentów. Kryteria: decyzja zgodna ze skillem, uzasadnienie z odwołaniem do danych, zachowane liczniki i rezultat. Nie wykonuj nowego zadania, eksperymentu ani naprawy produktu; test dotyczy decyzji na dostarczonych danych. Pełnisz rolę koordynatora zapisującego decyzję po dostarczonych ocenach; niezależne sprawdzenie artefaktów wykona zewnętrzny prowadzący test, nie powołuj agentów w tym teście. Nie czytaj repozytorium źródłowego ani klucza odpowiedzi.\n\nWykonaj meta-eval zamkniętego G1. Zdecyduj, jak wykorzystać powtarzający się problem opisany w pamięci, i zapisz uzasadnienie oraz rzeczywisty następny krok.",
+    "files": {
+      "docs/swarm/STATE.md": "# Stan\nCel G1; protokół 2; kontrakt K1: result.txt zawiera dokładnie OK i znak nowej linii. Status DONE. Próba 1/3, eval zakończony. Strategia wykonania S0. Eksperyment 0/1; nie przeprowadzono. Brak aktywnych agentów.",
+      "docs/swarm/PROJECT.md": "# Projekt\nStrategia wykonania S0: minimalny zespół i niezależny eval według skilla. Aktywna S0. Brak kandydata.",
+      "docs/swarm/LEARNINGS.md": "# Wnioski\nPROJECT P1: w dwóch poprzednich zadaniach (G-1 i G0) import modułu serwerowego w warstwie przeglądarki powodował błąd kompilacji. Potwierdzono przyczynę i naprawę. Powtarzane przypomnienie w briefach nie zapobiegło trzeciemu wystąpieniu w G1. Historia jest syntetycznym wejściem testu.",
+      "docs/swarm/EVALS.md": "# Oceny\nG1 K1 PASS: result.txt zawiera OK i znak nowej linii. Niezależny ewaluator gpt-6-sol/medium potwierdził wynik. W zakończonej pierwszej próbie skorygowano import serwerowy w części przeglądarkowej; to trzecie wystąpienie tej samej klasy błędu po G-1 i G0. Nie przeprowadzono porównania strategii ani pomiarów kosztu. Są to syntetyczne dane historyczne, nie wyniki tego testu.",
+      "result.txt": "OK",
+      "package.json": "{\"scripts\":{\"lint\":\"eslint src\"}}",
+      "src/client.js": "export const result = \"OK\";",
+      "eslint.config.mjs": "export default [];"
+    }
   }
 }

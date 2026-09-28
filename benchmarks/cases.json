@@ -111,5 +111,25 @@
       "src/client.js": "export const result = \"OK\";",
       "eslint.config.mjs": "export default [];"
     }
+  },
+  "planning-shared-contract": {
+    "request": "Przeczytaj .agents/skills/adaptive-swarm/SKILL.md. Wykonaj wyłącznie etap organizacji zadania opisanego w CONTRACT.md na podstawie dostarczonych plików. Zapisz PLAN.md z podziałem odpowiedzialności, kolejnością i ewentualną równoległością, briefami dla wybranych wykonawców oraz sposobem integracji i niezależnego eval. Jeżeli małe zadanie wykona koordynator, opisz jego zakres zamiast tworzyć zbędne role. To izolowany test decyzji planistycznej, nie realizacja zadania produktu: nie zmieniaj kodu, testów ani skilla, nie zapisuj pamięci docs/swarm, nie powołuj agentów i nie wykonuj eksperymentu strategii. Korzystaj tylko z plików tego folderu, bez sieci i bez czytania repozytorium źródłowego, klucza odpowiedzi lub innych prób. Zapisz tylko PLAN.md; zewnętrzny prowadzący oceni jego treść.",
+    "files": {
+      "CONTRACT.md": "# Zmiana prezentacji cen\nCel: usunąć utratę precyzji kwot w przepływie od katalogu do ekranu produktu.\nK1: API przekazuje kwotę bez konwersji na binarny float, a ekran pokazuje dokładnie dwie cyfry po kropce dla PLN, np. 9007199254740993.01 oraz 0.10.\nK2: Istniejący przepływ katalog → ekran nadal działa po zintegrowaniu zmian.\nK3: Weryfikacja obejmuje duże kwoty oraz zachowanie zer końcowych.\nZakres: api/catalog.py, web/price.js i odpowiednie testy. Waluta pozostaje PLN; kwoty wejściowe to nieujemne napisy z dwiema cyframi po kropce. Brak potrzeby zmian innych funkcji, zależności lub infrastruktury. Sposób reprezentacji kwoty w odpowiedzi API należy dobrać w ramach zadania. W repozytorium nie ustalono jeszcze nowego interfejsu. Dostępne są Python 3 i Node.js. Testy opisują stan wyjściowy, nie kontrakt przyszłego formatu.",
+      "api/catalog.py": "def product_response(amount):\n    return {\"price\": float(amount), \"currency\": \"PLN\"}",
+      "web/price.js": "export function priceLabel(product) {\n  return product.price.toFixed(2) + \" \" + product.currency;\n}",
+      "api/test_catalog.py": "from catalog import product_response\n\ndef test_response():\n    assert product_response(\"12.30\") == {\"price\": 12.3, \"currency\": \"PLN\"}",
+      "web/price.test.js": "import assert from \"node:assert/strict\";\nimport { priceLabel } from \"./price.js\";\nassert.equal(priceLabel({ price: 12.3, currency: \"PLN\" }), \"12.30 PLN\");",
+      "web/package.json": "{\"type\":\"module\"}"
+    }
+  },
+  "planning-independent-results": {
+    "request": "Przeczytaj .agents/skills/adaptive-swarm/SKILL.md. Wykonaj wyłącznie etap organizacji zadania opisanego w CONTRACT.md na podstawie dostarczonych plików. Zapisz PLAN.md z podziałem odpowiedzialności, kolejnością i ewentualną równoległością, briefami dla wybranych wykonawców oraz sposobem integracji i niezależnego eval. Jeżeli małe zadanie wykona koordynator, opisz jego zakres zamiast tworzyć zbędne role. To izolowany test decyzji planistycznej, nie realizacja zadania produktu: nie zmieniaj kodu, testów ani skilla, nie zapisuj pamięci docs/swarm, nie powołuj agentów i nie wykonuj eksperymentu strategii. Korzystaj tylko z plików tego folderu, bez sieci i bez czytania repozytorium źródłowego, klucza odpowiedzi lub innych prób. Zapisz tylko PLAN.md; zewnętrzny prowadzący oceni jego treść.",
+    "files": {
+      "CONTRACT.md": "# Dwie drobne poprawki bibliotek\nCel: poprawić escaping w csv_export.row i prezentację czasu w duration.label.\nK1: csv_export.row przyjmuje listę napisów i zwraca dokładnie jeden rekord CSV zgodny z regułami standardowej biblioteki csv: poprawne przecinki, cudzysłowy, nowe linie oraz polskie znaki; zakończenie rekordu to LF.\nK2: duration.label dla całkowitej liczby sekund 0..3599 zwraca MM:SS z dwucyfrowymi polami, np. 0 → 00:00, 65 → 01:05, 3599 → 59:59.\nK3: Istniejące interfejsy obu funkcji pozostają bez zmian.\nZakres: dwie biblioteki i ich lokalne testy. Biblioteki są niezależnie używane przez oddzielnych odbiorców, nie importują się nawzajem i nie korzystają ze wspólnych formatów ani stanu. Dostępny Python 3 i biblioteka standardowa. Bez nowych zależności, zmian konfiguracji i wspólnego frameworka.",
+      "csv_export.py": "def row(fields):\n    return \",\".join(fields) + \"\\n\"",
+      "duration.py": "def label(seconds):\n    return str(seconds // 60) + \":\" + str(seconds % 60)",
+      "checks.md": "Kontrole dla obu bibliotek można uruchamiać osobno. Projekt nie wymaga specjalnego runnera; wystarczą unittest lub samodzielne wywołania Pythona."
+    }
   }
 }

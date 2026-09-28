@@ -4,6 +4,8 @@ Skill do ręcznej realizacji zadań w Codex przez zespół dobierany do faktyczn
 
 Koordynatorem pozostaje model wybrany w rozmowie. Powoływani agenci korzystają z `gpt-6-sol` lub `gpt-6-luna`: Luna wykonuje najlżejsze, jednoznaczne podzadania, a Sol obsługuje trudniejsze prace i zawsze odpowiada za niezależny eval oraz meta-eval. Skill dobiera najmniejszy skuteczny zespół.
 
+Podzadania obejmują spójne, sprawdzalne rezultaty wraz z kontrolami wykonawcy. Przed uruchomieniem ich równolegle koordynator rozpoznaje wspólne założenia i zależności — nawet gdy agenci edytują różne pliki. Brief wskazuje również odbiorcę, postać wyniku i ustalenia potrzebne do integracji. Role na ilustracji są poglądowe; skill nie wymaga powoływania wszystkich tych agentów.
+
 ![Adaptive Swarm — schemat współpracy roju agentów od wyznaczenia celu do weryfikacji rezultatu](assets/adaptive-swarm-overview.png)
 
 ## Zawartość repozytorium

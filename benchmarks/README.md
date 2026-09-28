@@ -16,6 +16,8 @@ Większość przypadków sprawdza poszczególne decyzje po dostarczonych ocenach
 
 `recurring-defect-after-done` sprawdza rozważenie trwałego zabezpieczenia przy syntetycznej historii powtórzeń i zachowanie granic zamkniętego zadania. Nie sprawdza skuteczności samego zabezpieczenia.
 
+`planning-shared-contract` i `planning-independent-results` izolują etap organizacji pracy. Agent otrzymuje wymagania oraz kod i zapisuje wyłącznie `PLAN.md`: zakresy odpowiedzialności, briefy, kolejność/równoległość i sposób integracji oraz eval. Pierwszy przypadek zawiera zależność API/UI mimo rozłącznych plików; drugi obejmuje dwie małe niezależne biblioteki. Nie wykonują implementacji i nie mierzą faktycznej jakości integracji ani czasu dostarczenia. Dopuszczają wykonanie małego zadania przez koordynatora, bez wymuszania dodatkowych ról.
+
 Żaden z tych przypadków nie jest pełnym wykonaniem od celu do niezależnego eval. Wyłączenie powoływania agentów w żądaniu testowym izoluje odpowiedni etap i nie zmienia reguł zwykłego używania skilla. Ocena testowa jest wykonywana z zewnątrz.
 
 Przypadki decyzji protokołu wymagają zachowania rezultatu `result.txt`, limitu czterech plików pamięci, liczników oraz źródeł skilla. W przypadkach eval zachowaj wejściowy kod i testy; pamięć koordynatora nie jest tworzona. Brak zmierzonego kosztu nie jest kosztem zerowym. Nie oczekuj identycznego sformułowania notatek; oceniaj decyzję i jej skutki.
@@ -25,3 +27,5 @@ Pełny test wykonania wymaga osobnego zadania z rzeczywistymi artefaktami oraz �
 Raport pierwszego wydania: [v1.0.0](results-v1.0.0.md).
 
 Raport weryfikacji rezultatu i zabezpieczeń: [v1.1.0](results-v1.1.0.md).
+
+Porównanie organizacji pracy i przekazania wyniku: [v1.2.0](results-v1.2.0.md).

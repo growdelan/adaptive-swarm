@@ -4,7 +4,7 @@ Skill do ręcznej realizacji zadań w Codex przez zespół dobierany do faktyczn
 
 Koordynatorem pozostaje model wybrany w rozmowie. Powoływani agenci korzystają z `gpt-6-sol` lub `gpt-6-luna`: Luna wykonuje najlżejsze, jednoznaczne podzadania, a Sol obsługuje trudniejsze prace i zawsze odpowiada za niezależny eval oraz meta-eval. Skill dobiera najmniejszy skuteczny zespół.
 
-Podzadania obejmują spójne, sprawdzalne rezultaty wraz z kontrolami wykonawcy. Przed uruchomieniem ich równolegle koordynator rozpoznaje wspólne założenia i zależności — nawet gdy agenci edytują różne pliki. Brief wskazuje również odbiorcę, postać wyniku i ustalenia potrzebne do integracji. Role na ilustracji są poglądowe; skill nie wymaga powoływania wszystkich tych agentów.
+Koordynator określa wynik, kryteria, kontekst, właściciela zasobów, zależności i wymagane dowody. Nie deleguje równoczesnych edycji tych samych zasobów. Role na ilustracji są poglądowe; skill nie wymaga powoływania wszystkich tych agentów.
 
 ![Adaptive Swarm — schemat współpracy roju agentów od wyznaczenia celu do weryfikacji rezultatu](assets/adaptive-swarm-overview.png)
 
@@ -163,5 +163,7 @@ Szczegółowy kontrakt pozostaje w plikach skilla.
 ## Testowanie i wydania
 
 [Scenariusze regresyjne](benchmarks/README.md) pozwalają przygotować izolowane przypadki, odtworzyć decyzje protokołu i ocenić rzeczywiste artefakty oraz działania. Nie są ładowane podczas zwykłego używania skilla. Wyniki rozróżniają test decyzji od pełnego wykonania zadania; nie stanowią procentowej oceny skuteczności na dowolnych projektach.
+
+W `v1.2.1` przywrócono krótszą instrukcję po ośmiu rzeczywistych próbach z trzema wykonawcami, Astrą jako koordynatorem i osobnym ewaluatorem. Porównanie nie wykazało przewagi rozszerzenia z `v1.2.0`. [Raport A/B i ograniczenia](benchmarks/results-v1.2.1.md) opisuje główne wyniki oraz dodatkowe przypadki odkryte podczas ocen. Nie jest to dowód statystycznej wyższości krótszej wersji ani test całego skilla względem pracy bez niego.
 
 Wersje pakietu są oznaczane tagami. [GitHub Releases](https://github.com/growdelan/adaptive-swarm/releases) zawiera opis zmian i archiwum instalacyjne. Nazwa wywołania pozostaje `$adaptive-swarm`, niezależnie od numeru wydania.

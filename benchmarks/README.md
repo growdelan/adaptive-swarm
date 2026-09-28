@@ -29,3 +29,5 @@ Raport pierwszego wydania: [v1.0.0](results-v1.0.0.md).
 Raport weryfikacji rezultatu i zabezpieczeń: [v1.1.0](results-v1.1.0.md).
 
 Porównanie organizacji pracy i przekazania wyniku: [v1.2.0](results-v1.2.0.md).
+
+Porównanie pełnego wykonania przez trzyosobowe zespoły, uzasadniające skrócenie instrukcji: [v1.2.1](results-v1.2.1.md). Korzysta z osobnych projektów i aparatury, dostępnych w załączniku wydania; nie rozszerza powyższego zestawu `cases.json`.

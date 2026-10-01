@@ -2,7 +2,7 @@
 
 Skill do ręcznej realizacji zadań w Codex przez zespół dobierany do faktycznej trudności pracy. Łączy wykonanie, niezależną ocenę wyniku oraz doskonalenie lokalnej strategii projektu na podstawie dowodów.
 
-Koordynatorem pozostaje model wybrany w rozmowie. Powoływani agenci korzystają z `gpt-6-sol` lub `gpt-6-luna`: Luna wykonuje najlżejsze, jednoznaczne podzadania, a Sol obsługuje trudniejsze prace i zawsze odpowiada za niezależny eval oraz meta-eval. Skill dobiera najmniejszy skuteczny zespół.
+Koordynatorem pozostaje model wybrany w rozmowie. Powoływani agenci korzystają z `gpt-6.1-sol` lub `gpt-6-luna`: Luna wykonuje najlżejsze, jednoznaczne podzadania, a Sol obsługuje trudniejsze prace i zawsze odpowiada za niezależny eval oraz meta-eval. Skill dobiera najmniejszy skuteczny zespół.
 
 Koordynator określa wynik, kryteria, kontekst, właściciela zasobów, zależności i wymagane dowody. Nie deleguje równoczesnych edycji tych samych zasobów. Role na ilustracji są poglądowe; skill nie wymaga powoływania wszystkich tych agentów.
 
@@ -163,6 +163,8 @@ Szczegółowy kontrakt pozostaje w plikach skilla.
 ## Testowanie i wydania
 
 [Scenariusze regresyjne](benchmarks/README.md) pozwalają przygotować izolowane przypadki, odtworzyć decyzje protokołu i ocenić rzeczywiste artefakty oraz działania. Nie są ładowane podczas zwykłego używania skilla. Wyniki rozróżniają test decyzji od pełnego wykonania zadania; nie stanowią procentowej oceny skuteczności na dowolnych projektach.
+
+Od `v1.2.2` role Sola korzystają z `gpt-6.1-sol`, z wyjściowym effort `medium` zgodnym z [dokumentacją modelu](https://developers.openai.com/api/docs/models/gpt-6.1-sol). Dotyczy to wykonawców, eskalacji z Luny, niezależnego eval i meta-eval oraz zatwierdzania zmian strategii. Raporty wcześniejszych wydań opisują modele faktycznie użyte w tamtych próbach; nie są pomiarem jakości Sola 6.1.
 
 W `v1.2.1` przywrócono krótszą instrukcję po ośmiu rzeczywistych próbach z trzema wykonawcami, Astrą jako koordynatorem i osobnym ewaluatorem. Porównanie nie wykazało przewagi rozszerzenia z `v1.2.0`. [Raport A/B i ograniczenia](benchmarks/results-v1.2.1.md) opisuje główne wyniki oraz dodatkowe przypadki odkryte podczas ocen. Nie jest to dowód statystycznej wyższości krótszej wersji ani test całego skilla względem pracy bez niego.
 

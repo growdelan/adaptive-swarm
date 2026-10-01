@@ -31,3 +31,5 @@ Raport weryfikacji rezultatu i zabezpieczeń: [v1.1.0](results-v1.1.0.md).
 Porównanie organizacji pracy i przekazania wyniku: [v1.2.0](results-v1.2.0.md).
 
 Porównanie pełnego wykonania przez trzyosobowe zespoły, uzasadniające skrócenie instrukcji: [v1.2.1](results-v1.2.1.md). Korzysta z osobnych projektów i aparatury, dostępnych w załączniku wydania; nie rozszerza powyższego zestawu `cases.json`.
+
+Od v1.2.2 bieżący skill i klucz oceny wskazują Sol 6.1. Raporty poprzednich wydań oraz syntetyczna historia w `cases.json` zachowują pierwotne oznaczenia modeli. Przy nowym porównaniu ustal i zapisz model oraz effort dla obu wariantów; dawne wyniki nie potwierdzają jakości nowego modelu.

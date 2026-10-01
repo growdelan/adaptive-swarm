@@ -1,6 +1,6 @@
 ---
 name: adaptive-swarm
-description: Ręczna realizacja zadania przez adaptacyjny zespół Sol 6 i Luna 6, z niezależnym evalem i doskonaleniem strategii projektu na podstawie wyników.
+description: Ręczna realizacja zadania przez adaptacyjny zespół Sol 6.1 i Luna 6, z niezależnym evalem i doskonaleniem strategii projektu na podstawie wyników.
 ---
 
 # Adaptive Swarm
@@ -32,11 +32,11 @@ Jeżeli użytkownik jawnie zlecił pracę na celu i narzędzie celu jest dostęp
 
 Zaprojektuj najmniejszy skuteczny zespół. Koordynator może wykonać małe zadanie sam i powołać osobnego ewaluatora. Dodatkowe role uzasadniaj niezależną analizą, oszczędnością kontekstu lub równoległością. Nie powołuj dodatkowego agenta wyłącznie po to, aby wykorzystać Lunę 6. Aktywna strategia może zmienić podział pracy, kolejność, briefy, dobór modelu, effort i metody sprawdzania w granicach poniższych zasad.
 
-- Do powoływanych agentów dobieraj wyłącznie `gpt-6-sol` lub `gpt-6-luna`. Koordynatorem jest model wybrany w rozmowie; skill nie przełącza go sam.
+- Do powoływanych agentów dobieraj wyłącznie `gpt-6.1-sol` lub `gpt-6-luna`. Koordynatorem jest model wybrany w rozmowie; skill nie przełącza go sam.
 - Wybieraj `gpt-6-luna` do najlżejszych podzadań: wąskich, jednoznacznych, o niskich skutkach pomyłki i łatwym do sprawdzenia wyniku. Przykłady: wyszukanie wskazanych symboli, inwentaryzacja plików, ekstrakcja określonych pól, mechaniczna zmiana według ustalonego wzorca lub uruchomienie znanej kontroli. Oceń faktyczną trudność; mała liczba plików nie oznacza prostego zadania.
-- W pozostałych przypadkach wybieraj `gpt-6-sol`: niejasne wymagania, architektura, diagnoza przyczyn, złożona implementacja, integracja wymagająca decyzji i istotne skutki błędu. Niezależny ewaluator wyniku, meta-ewaluator i agent zatwierdzający zmianę strategii zawsze używają Sol 6. Luna 6 może zebrać dane lub uruchomić kontrolę, ale nie zastępuje ich oceny.
-- Jeśli podzadanie Luny 6 ujawnia niejednoznaczność, większy zakres lub niewiarygodny wynik, przekaż je do Sol 6 z ustaleniami i dowodami. Gdy Luna 6 jest niedostępna, użyj Sol 6 i odnotuj zastępstwo; gdy brakuje Sola do roli, która go wymaga, zgłoś ograniczenie. Zmiana modelu nie resetuje prób: naprawa po negatywnym eval zużywa kolejną próbę całego celu.
-- Effort dobieraj niezależnie od modelu, spośród poziomów przez niego obsługiwanych. Punktem wyjścia jest `medium` dla Sol 6 i `high` dla Luny 6; dla jednoznacznych operacji można go obniżyć, a dla trudnej analizy podnieść z uzasadnieniem. Ustaw model i effort parametrami narzędzia. Gdy pełny fork wyklucza te parametry, użyj świeżego kontekstu i samowystarczalnego briefu.
+- W pozostałych przypadkach wybieraj `gpt-6.1-sol`: niejasne wymagania, architektura, diagnoza przyczyn, złożona implementacja, integracja wymagająca decyzji i istotne skutki błędu. Niezależny ewaluator wyniku, meta-ewaluator i agent zatwierdzający zmianę strategii zawsze używają Sol 6.1. Luna 6 może zebrać dane lub uruchomić kontrolę, ale nie zastępuje ich oceny.
+- Jeśli podzadanie Luny 6 ujawnia niejednoznaczność, większy zakres lub niewiarygodny wynik, przekaż je do Sol 6.1 z ustaleniami i dowodami. Gdy Luna 6 jest niedostępna, użyj Sol 6.1 i odnotuj zastępstwo; gdy brakuje Sola do roli, która go wymaga, zgłoś ograniczenie. Zmiana modelu nie resetuje prób: naprawa po negatywnym eval zużywa kolejną próbę całego celu.
+- Effort dobieraj niezależnie od modelu, spośród poziomów przez niego obsługiwanych. Punktem wyjścia jest `medium` dla Sol 6.1 i `high` dla Luny 6; dla jednoznacznych operacji można go obniżyć, a dla trudnej analizy podnieść z uzasadnieniem. Ustaw model i effort parametrami narzędzia. Gdy pełny fork wyklucza te parametry, użyj świeżego kontekstu i samowystarczalnego briefu.
 - Tylko koordynator powołuje agentów i zapisuje pamięć. Kolejkuj pracę według dostępnych slotów. Każdy brief określa wynik, kryteria, kontekst, właściciela zasobów, zależności i wymagane dowody. Nie deleguj równoczesnych edycji tych samych zasobów.
 - Ewaluator nie tworzy ani nie naprawia ocenianego wyniku. Może pełnić też rolę meta-ewaluatora, jeśli nie był autorem ocenianej zmiany procesu. Gdy nim był, ocenę porównania powierz innemu niezależnemu agentowi; nie trzeba utrzymywać osobnego stałego zespołu.
 - Braku wymaganych narzędzi, modelu lub niezależnej oceny nie zastępuj deklaracją sukcesu ani symulowaniem agentów w tej samej rozmowie.
